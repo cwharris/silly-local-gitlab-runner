@@ -2,6 +2,11 @@ set -Eeox pipefail
 
 cd $(dirname "$(realpath "$0")")
 
+if [[ $# -ne 1 ]]; then
+    echo "Must provide gitlab ci stage to process"
+    exit 1;
+fi;
+
 # kill and remove the existing container if not already done
 docker stop gitlab-runner || :
 docker container rm gitlab-runner || :
@@ -20,7 +25,7 @@ docker exec -it -w $PWD gitlab-runner git config --global --add safe.directory "
 docker exec -it -w $PWD gitlab-runner gitlab-runner exec docker \
     --docker-privileged \
     --docker-volumes /var/run/docker.sock:/var/run/docker.sock \
-    build
+    $1
 
 # kill and remove the existing container
 docker stop gitlab-runner
