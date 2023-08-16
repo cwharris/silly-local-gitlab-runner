@@ -1,13 +1,13 @@
 image: docker:20.10.16
-services:
-  - docker:20.10.16-dind
+# services:
+#   - docker:20.10.16-dind
 before_script:
   - docker info
 
-variables:
-  DOCKER_DRIVER: overlay2
-  DOCKER_TLS_CERTDIR: ""
-  DOCKER_HOST: tcp://docker:2375
+# variables:
+#   DOCKER_DRIVER: overlay2
+#   DOCKER_TLS_CERTDIR: ""
+#   DOCKER_HOST: tcp://docker:2375
 
 
 build:
